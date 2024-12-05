@@ -1,5 +1,22 @@
 import { ACTION_TYPE } from "../product-store";
 
+//* Action creators
+//* using this we don't have to write store.dispatch({object}) {object} => every time
+export function decreaseCartItemQuantity(productId) {
+  return {
+    type: ACTION_TYPE.DECREASE_CART_ITEM,
+    payload: { productId: productId },
+  };
+}
+
+export function addCartItem(productId, quntity) {
+  return {
+    type: ACTION_TYPE.ADD_PRODUCT_CART,
+    payload: { productId: productId, quntity: quntity },
+  };
+}
+
+//* Reducer
 function cartReducer(state = [], action) {
   switch (action.type) {
     case ACTION_TYPE.ADD_PRODUCT_CART:
@@ -18,7 +35,7 @@ function cartReducer(state = [], action) {
       });
 
     case ACTION_TYPE.DECREASE_CART_ITEM:
-      return state.cart.map((i) => {
+      return state.map((i) => {
         if (i.productId === action.payload.productId && i.quntity !== 0) {
           return { ...i, quntity: i.quntity - 1 };
         } else {

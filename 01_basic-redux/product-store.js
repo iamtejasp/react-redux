@@ -1,7 +1,10 @@
 import { combineReducers, createStore } from "redux";
 import { productList } from "./product-list";
 import productReducer from "./reducers/product-reducer";
-import cartReducer from "./reducers/cart-reducer";
+import cartReducer, {
+  addCartItem,
+  decreaseCartItemQuantity,
+} from "./reducers/cart-reducer";
 import wishListReducer from "./reducers/wishList-reducer";
 
 export const ACTION_TYPE = {
@@ -77,15 +80,8 @@ store.subscribe(() => {
 });
 
 //* redux store
-store.dispatch({
-  type: ACTION_TYPE.ADD_PRODUCT_CART,
-  payload: { productId: 3, quntity: 10 },
-});
-
-store.dispatch({
-  type: ACTION_TYPE.ADD_PRODUCT_CART,
-  payload: { productId: 1, quntity: 2 },
-});
+store.dispatch(addCartItem(3, 10));
+store.dispatch(addCartItem(1, 2));
 
 store.dispatch({
   type: ACTION_TYPE.ADD_PRODUCT_CART,
@@ -107,15 +103,8 @@ store.dispatch({
   payload: { productId: 2 },
 });
 
-store.dispatch({
-  type: ACTION_TYPE.DECREASE_CART_ITEM,
-  payload: { productId: 3 },
-});
-
-store.dispatch({
-  type: ACTION_TYPE.DECREASE_CART_ITEM,
-  payload: { productId: 3 },
-});
+store.dispatch(decreaseCartItemQuantity(3));
+store.dispatch(decreaseCartItemQuantity(3));
 
 store.dispatch({
   type: ACTION_TYPE.ADD_PRODUCT_CART,
